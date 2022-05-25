@@ -15,19 +15,19 @@ class LuceneTester {
         WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer();
         Directory directory = FSDirectory.open(new File("e:test\\demoproject\\vms"));
         IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
-	  config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
+	config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
         IndexWriter indexWriter = new IndexWriter(directory,config);
- 	  File[] files = new File("E:\\test\\demoproject\\textfile").listFiles();
-	  for(File file_for_index : files)
+ 	File[] files = new File("E:\\test\\demoproject\\textfile").listFiles();
+	for(File file_for_index : files)
         {
 		Document doc = new Document();
         	Reader read=new FileReader(file_for_index);
-       	doc.add(new Field("fieldname", read));
+       		doc.add(new Field("fieldname", read));
         	doc.add(new StringField("file_name",file_for_index.getName() , Field.Store.YES));
         	indexWriter.addDocument(doc);
         	indexWriter.commit();
 
         }
-	  indexWriter.close();
+	indexWriter.close();
 	}
 }
