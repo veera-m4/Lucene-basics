@@ -1,0 +1,45 @@
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.core.SimpleAnalyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.*;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.*;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.store.*;
+import org.apache.lucene.util.Version;
+import org.apache.lucene.search.IndexSearcher;
+import  org.apache.lucene.document.*;
+import java.io.*;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopDocs;
+import java.util.*;
+
+
+class LuceneTester {
+
+    public static void main(String args[]) throws IOException, ParseException
+    {
+        WhitespaceAnalyzer analyzer = new WhitespaceAnalyzer();
+        Directory directory = FSDirectory.open(new File("e:test\\demoproject\\vms"));
+        IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
+	  config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
+        IndexWriter indexWriter = new IndexWriter(directory,config);
+ 	  File[] files = new File("E:\\test\\demoproject\\textfile").listFiles();
+	  for(File file_for_index : files)
+        {
+		Document doc = new Document();
+        	Reader read=new FileReader(file_for_index);
+       	doc.add(new Field("fieldname", read));
+        	doc.add(new StringField("file_name",file_for_index.getName() , Field.Store.YES));
+        	indexWriter.addDocument(doc);
+        	indexWriter.commit();
+
+        }
+	  indexWriter.close();
+	}
+}
