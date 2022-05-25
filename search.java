@@ -28,7 +28,7 @@ class search
 
 		Sort sort = new Sort(SortField.FIELD_SCORE, new SortField("fieldname", SortField.Type.STRING,true));
         	TopDocs docs=sear.search(query,10,sort);
-       	ScoreDoc[] result=docs.scoreDocs;
+       		ScoreDoc[] result=docs.scoreDocs;
         	int result_size=docs.totalHits;
         	System.out.println("no_of_hits : "+result_size);
         	for(int i=0;i<result_size;i++)
