@@ -33,8 +33,8 @@ class search
         	System.out.println("no_of_hits : "+result_size);
         	for(int i=0;i<result_size;i++)
         	{
-            	Document d= sear.doc(result[i].doc);
-            	System.out.println("document name :"+d.get("file_name"));
+			Document d= sear.doc(result[i].doc);
+			System.out.println("document name :"+d.get("file_name"));
         	}
 	}
 }
